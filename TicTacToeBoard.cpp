@@ -19,7 +19,12 @@ TicTacToeBoard::TicTacToeBoard()
 **/
 Piece TicTacToeBoard::toggleTurn()
 {
-  return Invalid;
+  if(turn == X){
+    turn = O;
+    return turn;
+  }
+  turn = X;
+  return turn;
 }
 
 /**
@@ -33,16 +38,24 @@ Piece TicTacToeBoard::toggleTurn()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-  return Invalid;
+  if(board[row][column] != Blank){
+    return board[row][column];
+  }
+  board[row][column] = turn;
+  toggleTurn();
+
+  return board[row][column];
 }
 
 /**
  * Returns what piece is at the provided coordinates, or Blank if there
  * are no pieces there, or Invalid if the coordinates are out of bounds
 **/
-Piece TicTacToeBoard::getPiece(int row, int column)
-{
-  return Invalid;
+Piece TicTacToeBoard::getPiece(int row, int column){
+  if(row >= BOARDSIZE || column >= BOARDSIZE || row < 0 || column < 0){
+    return Invalid;
+  }
+  return board[row][column];
 }
 
 /**
