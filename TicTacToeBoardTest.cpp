@@ -18,6 +18,99 @@ TEST(TicTacToeBoardTest, smoke_test){
 	ASSERT_TRUE(true);
 }
 
+TEST(TicTacToeBoardTest, placepiece_X_0_0_t1){
+	TicTacToeBoard board;
+	Piece output = board.placePiece(0,0);
+
+	ASSERT_EQ(output, X);
+}
+
+TEST(TicTacToeBoardTest, placepiece_O_0_0_t2){
+	TicTacToeBoard board;
+	board.placePiece(1,0);
+	Piece output = board.placePiece(0,0);
+
+	ASSERT_EQ(output, O);
+}
+
+TEST(TicTacToeBoardTest, placepiece_X_2_2_t1){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	Piece output = board.getPiece(2,2);
+
+	ASSERT_EQ(output, X);
+}
+
+TEST(TicTacToeBoardTest, placepiece_O_2_2_t2){
+	TicTacToeBoard board;
+	board.placePiece(1,0);
+	Piece output = board.placePiece(2,2);
+
+	ASSERT_EQ(output, O);
+}
+
+TEST(TicTacToeBoardTest, placepiece_X_1_2_t3){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(0,0);
+	Piece output = board.placePiece(1,2);
+
+	ASSERT_EQ(output, X);
+}
+
+TEST(TicTacToeBoardTest, placepiece_O_1_2_t4){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(0,0);
+	board.placePiece(1,0);
+	Piece output = board.placePiece(1,2);
+
+	ASSERT_EQ(output, O);
+}
+
+TEST(TicTacToeBoardTest, placepiece_overwrite_t2){
+	TicTacToeBoard board;
+	board.placePiece(2,1);
+	Piece output = board.placePiece(2,1);
+
+	ASSERT_EQ(output, X);
+}
+
+TEST(TicTacToeBoardTest, placepiece_overwrite_t3){
+	TicTacToeBoard board;
+	board.placePiece(2,1);
+	board.placePiece(1,2);
+	Piece output = board.placePiece(1,2);
+
+	ASSERT_EQ(output, O);
+}
+
+TEST(TicTacToeBoardTest, placepiece_overwrite_t4){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(0,0);
+	board.placePiece(1,0);
+	Piece output = board.placePiece(1,0);
+
+	ASSERT_EQ(output, X);
+}
+
+TEST(TicTacToeBoardTest, placepiece_overwrite_t9){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(0,0);
+	board.placePiece(1,0);
+	board.placePiece(2,1);
+	board.placePiece(0,1);
+	board.placePiece(1,1);
+	board.placePiece(2,0);
+	board.placePiece(0,2);
+	board.placePiece(1,2);
+	Piece output = board.placePiece(2,1);
+
+	ASSERT_EQ(output, O);
+}
+
 TEST(TicTacToeBoardTest, getpiece_oob_row_high){
 	TicTacToeBoard board;
 	Piece output = board.getPiece(5,2);
@@ -46,7 +139,49 @@ TEST(TicTacToeBoardTest, getpiece_oob_column_low){
 	ASSERT_EQ(output, Invalid);
 }
 
-TEST(TicTacToeBoardTest, X_0_0_t1){
+TEST(TicTacToeBoardTest, getpiece_Blank_t1){
+	TicTacToeBoard board;
+	board.placePiece(2,0);
+	Piece output = board.getPiece(0,0);
+
+	ASSERT_EQ(output, Blank);
+}
+
+TEST(TicTacToeBoardTest, getpiece_Blank_t2){
+	TicTacToeBoard board;
+	board.placePiece(2,1);
+	board.placePiece(0,1);
+	Piece output = board.getPiece(1,1);
+
+	ASSERT_EQ(output, Blank);
+}
+
+TEST(TicTacToeBoardTest, getpiece_Blank_t3){
+	TicTacToeBoard board;
+	board.placePiece(2,1);
+	board.placePiece(2,2);
+	board.placePiece(1,1);
+	Piece output = board.getPiece(0,0);
+
+	ASSERT_EQ(output, Blank);
+}
+
+TEST(TicTacToeBoardTest, getpiece_Blank_t8){
+	TicTacToeBoard board;
+	board.placePiece(0,0);
+	board.placePiece(0,1);
+	board.placePiece(0,2);
+	board.placePiece(1,0);
+	board.placePiece(1,1);
+	board.placePiece(1,2);
+	board.placePiece(2,0);
+	board.placePiece(2,1);
+	Piece output = board.getPiece(2,2);
+
+	ASSERT_EQ(output, Blank);
+}
+
+TEST(TicTacToeBoardTest, getpiece_X_0_0_t1){
 	TicTacToeBoard board;
 	board.placePiece(0,0);
 	Piece output = board.getPiece(0,0);
@@ -54,7 +189,7 @@ TEST(TicTacToeBoardTest, X_0_0_t1){
 	ASSERT_EQ(output, X);
 }
 
-TEST(TicTacToeBoardTest, O_0_0_t2){
+TEST(TicTacToeBoardTest, getpiece_O_0_0_t2){
 	TicTacToeBoard board;
 	board.placePiece(1,0);
 	board.placePiece(0,0);
@@ -63,7 +198,7 @@ TEST(TicTacToeBoardTest, O_0_0_t2){
 	ASSERT_EQ(output, O);
 }
 
-TEST(TicTacToeBoardTest, X_2_2_t1){
+TEST(TicTacToeBoardTest, getpiece_X_2_2_t1){
 	TicTacToeBoard board;
 	board.placePiece(2,2);
 	Piece output = board.getPiece(2,2);
@@ -71,7 +206,7 @@ TEST(TicTacToeBoardTest, X_2_2_t1){
 	ASSERT_EQ(output, X);
 }
 
-TEST(TicTacToeBoardTest, O_2_2_t2){
+TEST(TicTacToeBoardTest, getpiece_O_2_2_t2){
 	TicTacToeBoard board;
 	board.placePiece(1,0);
 	board.placePiece(2,2);
@@ -80,7 +215,7 @@ TEST(TicTacToeBoardTest, O_2_2_t2){
 	ASSERT_EQ(output, O);
 }
 
-TEST(TicTacToeBoardTest, X_1_2_t3){
+TEST(TicTacToeBoardTest, getpiece_X_1_2_t3){
 	TicTacToeBoard board;
 	board.placePiece(2,2);
 	board.placePiece(0,0);
@@ -90,7 +225,7 @@ TEST(TicTacToeBoardTest, X_1_2_t3){
 	ASSERT_EQ(output, X);
 }
 
-TEST(TicTacToeBoardTest, O_1_2_t4){
+TEST(TicTacToeBoardTest, getpiece_O_1_2_t4){
 	TicTacToeBoard board;
 	board.placePiece(2,2);
 	board.placePiece(0,0);
@@ -99,4 +234,20 @@ TEST(TicTacToeBoardTest, O_1_2_t4){
 	Piece output = board.getPiece(1,2);
 
 	ASSERT_EQ(output, O);
+}
+
+TEST(TicTacToeBoardTest, getpiece_X_1_1_t9){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(0,0);
+	board.placePiece(1,0);
+	board.placePiece(1,2);
+	board.placePiece(2,1);
+	board.placePiece(2,0);
+	board.placePiece(0,1);
+	board.placePiece(0,2);
+	board.placePiece(1,1);
+	Piece output = board.getPiece(1,1);
+
+	ASSERT_EQ(output, X);
 }

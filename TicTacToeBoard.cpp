@@ -64,5 +64,21 @@ Piece TicTacToeBoard::getPiece(int row, int column){
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+  // Game unfinished
+  for(int i=0; i<BOARDSIZE; i++)
+    for(int j=0; j<BOARDSIZE; j++)
+      if(board[i][j] = Blank) return Invalid;
+
+  // Diagonals
+  Piece current = getPiece(1,1); 
+
+  if(current == getPiece(0,0) && current == getPiece(2,2)){
+    return current;
+  }
+  if(current == getPiece(2,0) && current == getPiece(0,2)){
+    return current;
+  }
+
+  // No win condition reached
+  return Blank;
 }
