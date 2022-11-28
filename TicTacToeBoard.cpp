@@ -64,20 +64,48 @@ Piece TicTacToeBoard::getPiece(int row, int column){
 **/
 Piece TicTacToeBoard::getWinner()
 {
+  // Diagonals
+  Piece current = getPiece(1,1); 
+  if(current != Blank){
+    if(current == getPiece(0,0) && current == getPiece(2,2)){
+      return current;
+    }
+    if(current == getPiece(2,0) && current == getPiece(0,2)){
+      return current;
+    }
+    // Center row and column
+    if(current == getPiece(1,0) && current == getPiece(1,2)){
+      return current;
+    }
+    if(current == getPiece(0,1) && current == getPiece(2,1)){
+      return current;
+    }
+  }
+  // Top right row and column
+  current = getPiece(0,0);  
+  if(current != Blank){
+    if(current == getPiece(0,1) && current == getPiece(0,2)){
+      return current;
+    }
+    if(current == getPiece(1,0) && current == getPiece(2,0)){
+      return current;
+    }
+  }
+  // Bottom right row and column
+  current = getPiece(2,2);  
+  if(current != Blank){
+    if(current == getPiece(0,2) && current == getPiece(1,2)){
+      return current;
+    }
+    if(current == getPiece(2,0) && current == getPiece(2,1)){
+      return current;
+    }
+  }
+
   // Game unfinished
   for(int i=0; i<BOARDSIZE; i++)
     for(int j=0; j<BOARDSIZE; j++)
       if(board[i][j] = Blank) return Invalid;
-
-  // Diagonals
-  Piece current = getPiece(1,1); 
-
-  if(current == getPiece(0,0) && current == getPiece(2,2)){
-    return current;
-  }
-  if(current == getPiece(2,0) && current == getPiece(0,2)){
-    return current;
-  }
 
   // No win condition reached
   return Blank;

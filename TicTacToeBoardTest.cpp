@@ -251,3 +251,64 @@ TEST(TicTacToeBoardTest, getpiece_X_1_1_t9){
 
 	ASSERT_EQ(output, X);
 }
+
+TEST(TicTacToeBoardTest, getwinner_unfinished){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(0,0);
+	board.placePiece(1,0);
+	board.placePiece(1,2);
+	Piece output = board.getWinner();
+
+	ASSERT_EQ(output, Invalid);
+}
+
+TEST(TicTacToeBoardTest, getwinner_downdiag_X){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(1,0);
+	board.placePiece(0,0);
+	board.placePiece(1,2);
+	board.placePiece(1,1);
+	Piece output = board.getWinner();
+
+	ASSERT_EQ(output, X);
+}
+
+TEST(TicTacToeBoardTest, getwinner_downdiag_O){
+	TicTacToeBoard board;
+	board.placePiece(2,1);
+	board.placePiece(2,2);
+	board.placePiece(1,0);
+	board.placePiece(0,0);
+	board.placePiece(1,2);
+	board.placePiece(1,1);
+	Piece output = board.getWinner();
+
+	ASSERT_EQ(output, O);
+}
+
+TEST(TicTacToeBoardTest, getwinner_updiag_X){
+	TicTacToeBoard board;
+	board.placePiece(0,2);
+	board.placePiece(1,0);
+	board.placePiece(1,1);
+	board.placePiece(1,2);
+	board.placePiece(2,0);
+	Piece output = board.getWinner();
+
+	ASSERT_EQ(output, X);
+}
+
+TEST(TicTacToeBoardTest, getwinner_updiag_O){
+	TicTacToeBoard board;
+	board.placePiece(2,2);
+	board.placePiece(0,2);
+	board.placePiece(1,0);
+	board.placePiece(1,1);
+	board.placePiece(1,2);
+	board.placePiece(2,0);
+	Piece output = board.getWinner();
+
+	ASSERT_EQ(output, O);
+}
